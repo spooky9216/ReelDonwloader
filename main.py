@@ -3,6 +3,7 @@ from tkinter import ttk
 import instaloader
 import re
 import os
+import threading
 
 def extract_username_and_media_code_from_url(url):
     pattern = r"(?:https?:\/\/)?(?:www\.)?instagram\.com\/reel\/([a-zA-Z0-9_-]+)\/"
@@ -19,15 +20,20 @@ def download_reel():
     url = url_entry.get()
     username, media_code = extract_username_and_media_code_from_url(url)
 
-    loader = instaloader.Instaloader()
+    def download_thread():
+        loader = instaloader.Instaloader()
 
-    try:
-        post = instaloader.Post.from_shortcode(loader.context, media_code)
-        loader.download_post(post, target=f"{username}_reels")
-        status_label.configure(text="Download complete!")
-        delete_files(f"{username}_reels")
-    except instaloader.exceptions.InstaloaderException:
-        status_label.configure(text="Unable to download reel.")
+        try:
+            post = instaloader.Post.from_shortcode(loader.context, media_code)
+            loader.download_post(post, target=f"{username}_reels")
+            status_label.configure(text="Download complete!")
+            delete_files(f"{username}_reels")
+        except instaloader.exceptions.InstaloaderException:
+            status_label.configure(text="Unable to download reel.")
+
+    # Create a separate thread for downloading the reel
+    thread = threading.Thread(target=download_thread)
+    thread.start()
 
 
 def delete_files(folder_path):
