@@ -7,6 +7,9 @@ This is a Python application that allows you to download Instagram Reels using t
 Make sure you have the following installed before running the application:
 
 - Python 3.x: You can download Python from the official website: https://www.python.org/downloads/
+- Install the required dependencies by running the following command:
+pip install -r requirements.txt
+
 
 ## Installation
 
@@ -14,8 +17,7 @@ Make sure you have the following installed before running the application:
 
 2. Open a terminal or command prompt and navigate to the project directory.
 
-3. Install the required dependencies by running the following command:
-
+3. Install the required dependencies by running the command mentioned above.
 
 ## Usage
 
