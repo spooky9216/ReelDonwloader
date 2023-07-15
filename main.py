@@ -44,7 +44,7 @@ def delete_files(folder_path):
 
 # Create the main application window
 root = tk.Tk()
-root.title("Advanced Dark-Themed GUI")
+root.title("Instagram Reel Downloader")
 root.geometry("400x200")
 root.configure(bg="#333333")  # Set background color
 
